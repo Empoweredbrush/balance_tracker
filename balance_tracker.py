@@ -21,8 +21,8 @@ def Start():
 
     answer = input()
 
-    #if (answer.lower() == "a"):
-       # Add()
+    if (answer.lower() == "a"):
+       Add()
 
 def Add():
     print("Welcome to the add part of the program! We will be adding a new expense to your tracker but need some info.")
@@ -35,10 +35,14 @@ def Add():
 
     for row in rows:
         idList.append(row)
-    
-    item = idList[-1]
 
-    id = 1 + int(item)
+    length = len(idList)
+
+    if length == 0:
+        id = 1
+    if length  >= 1:
+        id = length + 1
+    
 
     print("To start, please give the name of the expense:")
 
@@ -63,8 +67,17 @@ def Add():
 
     conn.close()
 
-#def Update():
+def Update():
+    print("To begin updating your Balance Tracker entry, please give the name of the expense you wish to update:")
+    name = input()
 
+    print("With that expense what are you updating? (A for name, b for expense amount, c for description):")
+    response = input()
+    answer = response.lower()
+
+    
 #def Delete():
 
 #def View():
+
+Start()
