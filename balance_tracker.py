@@ -35,6 +35,10 @@ def Add():
 
     for row in rows:
         idList.append(row)
+    
+    item = idList[-1]
+
+    id = 1 + int(item)
 
     print("To start, please give the name of the expense:")
 
@@ -42,7 +46,8 @@ def Add():
 
     print("Now, please put down the amount (Note, after the decimal max of two numbers, Example: 2.50):")
 
-    amount = input()
+    number = input()
+    amount = float(number)
 
     print("Next, add a very very short description, 50 character limit, or type no to leave blank:")
 
@@ -54,7 +59,9 @@ def Add():
         description = answer
     
     conn.execute('''INSERT INTO EXPENSES (ID, NAME, AMOUNT, DESCRIPTION)
-                 VALUES ()''')
+                 VALUES ({id}, {name}, {amount}, {description})''')
+
+    conn.close()
 
 #def Update():
 
