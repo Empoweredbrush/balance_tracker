@@ -68,16 +68,27 @@ def Add():
     conn.close()
 
 def Update():
-    print("To begin updating your Balance Tracker entry, please give the name of the expense you wish to update:")
+    print("To begin updating your Balance Tracker entry, please give the name of the expense you wish to update(Note is case sensitive):")
     name = input()
 
     print("With that expense what are you updating? (A for name, b for expense amount, c for description):")
     response = input()
     answer = response.lower()
 
-    
-#def Delete():
+    if answer == "a":
+        newName = input("What is the new name of the expense?")
 
-#def View():
+    if answer == "b":
+        newAmount = input("What is the new amount:")
+
+    if answer == "c":
+        newDesc = input("What is the new description(50 character limit)")
+
+
+def Delete():
+    entry = input("What is the expense name you wish to delete(Note case sensitive):")
+
+def View():
+    choice = input("How much of you balance are you viewing? (A one item, B multiple items, C all items): ")
 
 Start()
