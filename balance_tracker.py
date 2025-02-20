@@ -89,6 +89,16 @@ def Delete():
     entry = input("What is the expense name you wish to delete(Note case sensitive):")
 
 def View():
-    choice = input("How much of you balance are you viewing? (A one item, B multiple items, C all items): ")
+    choice = input("How much of you balance are you viewing? (A for one item, B for multiple items, C for all items): ")
+    
+    answer = choice.lower()
+
+    #if answer == "a":
+
+    #if answer == "b":
+
+    #if answer == "c":
+
+
 
 Start()
