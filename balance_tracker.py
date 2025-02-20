@@ -63,7 +63,7 @@ def Add():
         description = answer
     
     conn.execute('''INSERT INTO EXPENSES (ID, NAME, AMOUNT, DESCRIPTION)
-                 VALUES ({id}, {name}, {amount}, {description})''')
+                 VALUES (?, ?, ?, ?)''', (id, name, amount, description))
 
     conn.close()
 
