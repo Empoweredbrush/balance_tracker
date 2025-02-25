@@ -23,6 +23,15 @@ def Start():
 
     if (answer.lower() == "a"):
        Add()
+    
+    if (answer.lower() == "b"):
+        Update()
+    
+    if (answer.lower() == "c"):
+        Delete()
+    
+    if (answer.lower() == "d"):
+        View()
 
 def Add():
     print("Welcome to the add part of the program! We will be adding a new expense to your tracker but need some info.")
@@ -89,23 +98,24 @@ def Update():
     if answer == "c":
         newDesc = input("What is the new description(50 character limit)")
         conn.execute('''UPDATE EXPENSES SET DESCRIPTION = (?) WHERE NAME = (?)''', (newDesc, name))
+        conn.close()
 
 
 def Delete():
     entry = input("What is the expense name you wish to delete(Note case sensitive):")
 
-
+    conn.execute('''DELETE FROM EXPENSES WHERE NAME = (?)''', (entry))
 
 def View():
-    choice = input("How much of you balance are you viewing? (A for one item, B for multiple items, C for all items): ")
-    
-    answer = choice.lower()
 
-    #if answer == "a":
 
-    #if answer == "b":
+    print("What is the expense are you looking for? (Note: case sensitive):")
 
-    #if answer == "c":
+    item = input()
+
+    conn.execute('''SELECT NAME, AMOUNT, DESCRIPTION FROM EXPENSES WHERE NAME = (?)''', (item))
+
+    conn.close()
 
 
 
