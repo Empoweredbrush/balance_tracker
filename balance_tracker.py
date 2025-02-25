@@ -71,8 +71,9 @@ def Add():
     if (answer.lower() != "no"):
         description = answer
     
-    conn.execute('''INSERT INTO EXPENSES (ID, NAME, AMOUNT, DESCRIPTION)
-                 VALUES (?, ?, ?, ?)''', (id, name, amount, description))
+    conn.execute('''INSERT INTO EXPENSES (ID, NAME, AMOUNT, DESCRIPTION) VALUES (?, ?, ?, ?)''', (id, name, amount, description))
+
+    conn.commit()
 
     conn.close()
 
@@ -88,32 +89,43 @@ def Update():
         newName = input("What is the new name of the expense?")
 
         conn.execute('''UPDATE EXPENSES SET NAME = (?) WHERE NAME = (?)''', (newName, name))
+        conn.commit()
         conn.close()
 
     if answer == "b":
         newAmount = input("What is the new amount:")
         conn.execute('''UPDATE EXPENSES SET AMOUNT = (?) WHERE NAME = (?)''', (newAmount, name))
+        conn.commit()
         conn.close()
 
     if answer == "c":
         newDesc = input("What is the new description(50 character limit)")
         conn.execute('''UPDATE EXPENSES SET DESCRIPTION = (?) WHERE NAME = (?)''', (newDesc, name))
+        conn.commit()
         conn.close()
 
 
 def Delete():
     entry = input("What is the expense name you wish to delete(Note case sensitive):")
 
-    conn.execute('''DELETE FROM EXPENSES WHERE NAME = (?)''', (entry))
+    conn.execute('''DELETE FROM EXPENSES WHERE NAME = (?)''', (entry,))
+    conn.commit()
+    conn.close()
 
 def View():
 
+    cur = conn.cursor()
 
     print("What is the expense are you looking for? (Note: case sensitive):")
 
     item = input()
 
-    conn.execute('''SELECT NAME, AMOUNT, DESCRIPTION FROM EXPENSES WHERE NAME = (?)''', (item))
+    cur.execute('''SELECT NAME, AMOUNT, DESCRIPTION FROM EXPENSES WHERE NAME = (?)''', (item,))
+
+    row = cur.fetchone()
+
+    if row:
+        print(row)
 
     conn.close()
 
